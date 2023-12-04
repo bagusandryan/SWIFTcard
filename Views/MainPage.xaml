@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:contentviews="clr-namespace:SWIFTcard.ContentViews"
+             xmlns:viewModel="clr-namespace:SWIFTcard.ViewModels" xmlns:models="clr-namespace:SWIFTcard.Models"
+             x:Class="SWIFTcard.Views.MainPage"
+             x:Name="This"
+             x:DataType="viewModel:MainViewModel">
+     <Grid Margin="30,20"
+           x:Name="GridHolder"
+           RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <CarouselView x:Name="OnBoardingCarouselView"
+                      FlowDirection="LeftToRight"
+                      Loop="False"
+                      ItemsSource="{Binding CardList}"
+                      Grid.Row="0"
+                      Margin="-20,0"    
+                      >
+             <CarouselView.ItemTemplate>
+                 <DataTemplate>
+                    <contentviews:CardView FrontFooter="{Binding Deck.QuestionLang}"
+                                           x:DataType="models:Card"
+                                           FrontHeader="{Binding Question}"
+                                           BackFooter="{Binding Deck.AnswerLang}"
+                                           BackHeader="{Binding Answer}"
+                                           BackContext="{Binding Context}"/>
+                </DataTemplate>
+             </CarouselView.ItemTemplate>
+        </CarouselView>
+        <Grid Grid.Row="1"
+              HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button
+                CornerRadius="40"
+                HeightRequest="80"
+                WidthRequest="80"
+                Grid.Column="0"
+                ImageSource="menu.png"
+                HorizontalOptions="Start"
+                Style="{DynamicResource Secondarybutton}"/>
+            <Button
+                CornerRadius="40"
+                HeightRequest="80"
+                WidthRequest="80"
+                Grid.Column="1"
+                ImageSource="add.png"
+                HorizontalOptions="End"
+                Style="{DynamicResource PrimaryButton}"/>
+        </Grid>
+    </Grid>
+</ContentPage>
+

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SWIFTcard.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:SWIFTcard.Views"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Shell.FlyoutBehavior="Disabled">
+    <Shell.Behaviors>
+          <toolkit:StatusBarBehavior StatusBarColor="{AppThemeBinding Light={StaticResource AppBackgroundColor}, Dark={StaticResource Gray950}}"
+                                     StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark=LightContent}" />
+    </Shell.Behaviors>
+    <ShellContent
+        Title="Home"
+        Shell.NavBarIsVisible="False"
+        Shell.TabBarIsVisible="False"
+        ContentTemplate="{DataTemplate views:MainPage}"
+        Route="MainPage" />
+
+</Shell>
+
