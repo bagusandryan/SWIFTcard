@@ -47,11 +47,17 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Button" x:Key="PrimaryButton">
+    <Style TargetType="Button" x:Key="CircleButton">
+        <Setter Property="CornerRadius" Value="40" />
+        <Setter Property="HeightRequest" Value="80" />
+        <Setter Property="WidthRequest" Value="80" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="PrimaryCircleButton" BasedOn="{StaticResource CircleButton}">
         <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
     </Style>
 
-    <Style TargetType="Button" x:Key="Secondarybutton">
+    <Style TargetType="Button" x:Key="SecondaryCircleButton" BasedOn="{StaticResource CircleButton}">
         <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}" />
      </Style>
 
