@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SWIFTcard.Views.CardDetailPage"
+             Title="CardDetailPage"
+             Background="Transparent">
+    <Frame BorderColor="Transparent"
+           Margin="-2,30,-2,-30"
+           CornerRadius="30"
+           >
+        <VerticalStackLayout Padding="30,30">
+            <Border Stroke="Transparent"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 30"
+                    Background="{DynamicResource CardBackgroundBrush}"
+                    HeightRequest="150"
+                    Padding="20"
+                    >
+                <Entry
+                    FontSize="35"
+                    Text="New word"></Entry>
+            </Border>
+            <Border Stroke="Transparent"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 30"
+                    Background="{DynamicResource CardBackgroundBrush}"
+                    HeightRequest="150"
+                    Padding="20"
+                    Margin="0,-70,0,0"
+                    >
+                <Border.Shadow>
+                    <Shadow
+                        Radius="30"
+                        Brush="Black"
+                        Opacity="0.3"
+                        Offset="0,-10"/>
+                </Border.Shadow>
+                 <Label Style="{DynamicResource CardMainLabel}"
+                       Text="Translation"/>
+            </Border>
+            <Border Stroke="Transparent"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 30"
+                    Background="{DynamicResource CardBackgroundBrush}"
+                    HeightRequest="200"
+                    Padding="20"
+                    Margin="0,-70,0,0"
+                    >
+                <Border.Shadow>
+                    <Shadow
+                        Radius="30"
+                        Brush="Black"
+                        Opacity="0.3"
+                        Offset="0,-10"/>
+                </Border.Shadow>
+                 <Label Style="{DynamicResource CardMainLabel}"
+                       Text="Context"/>
+            </Border>
+            <Button
+                Margin="0,-40,0,0"
+                ImageSource="save.png"
+                HorizontalOptions="End"
+                Style="{DynamicResource PrimaryCircleButton}"/>
+        </VerticalStackLayout>
+    </Frame>
+</ContentPage>
