@@ -72,6 +72,7 @@
 	  <None Remove="Resources\Images\reveal %28copy%29.svg" />
 	  <None Remove="Resources\Raw\decks.json" />
 	  <None Remove="Resources\Raw\cards.json" />
+	  <None Remove="Resources\Images\save.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Models\" />
@@ -89,5 +90,6 @@
 	  <BundleResource Include="Resources\Images\reveal_inverted.svg" />
 	  <BundleResource Include="Resources\Raw\decks.json" />
 	  <BundleResource Include="Resources\Raw\cards.json" />
+	  <BundleResource Include="Resources\Images\save.svg" />
 	</ItemGroup>
 </Project>
