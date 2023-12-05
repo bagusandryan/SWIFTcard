@@ -37,21 +37,16 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button
-                CornerRadius="40"
-                HeightRequest="80"
-                WidthRequest="80"
                 Grid.Column="0"
                 ImageSource="menu.png"
                 HorizontalOptions="Start"
-                Style="{DynamicResource Secondarybutton}"/>
+                Style="{DynamicResource SecondaryCircleButton}"/>
             <Button
-                CornerRadius="40"
-                HeightRequest="80"
-                WidthRequest="80"
                 Grid.Column="1"
                 ImageSource="add.png"
                 HorizontalOptions="End"
-                Style="{DynamicResource PrimaryButton}"/>
+                Style="{DynamicResource PrimaryCircleButton}"
+                Clicked="Button_Clicked"/>
         </Grid>
     </Grid>
 </ContentPage>

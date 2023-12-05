@@ -15,6 +15,11 @@ public partial class MainPage : ContentPage
         _viewModel = viewModel;
         BindingContext = _viewModel;
     }
+
+    async void Button_Clicked(System.Object sender, System.EventArgs e)
+    {
+        await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage());
+    }
 }
 
 
