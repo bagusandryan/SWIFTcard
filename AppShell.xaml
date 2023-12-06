@@ -6,10 +6,6 @@
     xmlns:views="clr-namespace:SWIFTcard.Views"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Shell.FlyoutBehavior="Disabled">
-    <Shell.Behaviors>
-          <toolkit:StatusBarBehavior StatusBarColor="{AppThemeBinding Light={StaticResource AppBackgroundColor}, Dark={StaticResource Gray950}}"
-                                     StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark=LightContent}" />
-    </Shell.Behaviors>
     <ShellContent
         Title="Home"
         Shell.NavBarIsVisible="False"

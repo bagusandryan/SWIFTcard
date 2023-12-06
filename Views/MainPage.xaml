@@ -2,51 +2,64 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:contentviews="clr-namespace:SWIFTcard.ContentViews"
              xmlns:viewModel="clr-namespace:SWIFTcard.ViewModels" xmlns:models="clr-namespace:SWIFTcard.Models"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SWIFTcard.Views.MainPage"
              x:Name="This"
-             x:DataType="viewModel:MainViewModel">
-     <Grid Margin="30,20"
+             x:DataType="viewModel:MainViewModel"
+             Style="{DynamicResource AppPage}">
+    <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+    <Grid>
+        <Grid Margin="30,20"
            x:Name="GridHolder"
            RowSpacing="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="80"/>
-        </Grid.RowDefinitions>
-        <CarouselView x:Name="OnBoardingCarouselView"
-                      FlowDirection="LeftToRight"
-                      Loop="False"
-                      ItemsSource="{Binding CardList}"
-                      Grid.Row="0"
-                      Margin="-20,0"    
-                      >
-             <CarouselView.ItemTemplate>
-                 <DataTemplate>
-                    <contentviews:CardView FrontFooter="{Binding Deck.QuestionLang}"
-                                           x:DataType="models:Card"
-                                           FrontHeader="{Binding Question}"
-                                           BackFooter="{Binding Deck.AnswerLang}"
-                                           BackHeader="{Binding Answer}"
-                                           BackContext="{Binding Context}"/>
-                </DataTemplate>
-             </CarouselView.ItemTemplate>
-        </CarouselView>
-        <Grid Grid.Row="1"
-              HorizontalOptions="FillAndExpand">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button
-                Grid.Column="0"
-                ImageSource="menu.png"
-                HorizontalOptions="Start"
-                Style="{DynamicResource SecondaryCircleButton}"/>
-            <Button
-                Grid.Column="1"
-                ImageSource="add.png"
-                HorizontalOptions="End"
-                Style="{DynamicResource PrimaryCircleButton}"
-                Clicked="Button_Clicked"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <CarouselView x:Name="OnBoardingCarouselView"
+                          FlowDirection="LeftToRight"
+                          Loop="False"
+                          ItemsSource="{Binding CardList}"
+                          Grid.Row="0"
+                          Margin="-20,0"    
+                          >
+                 <CarouselView.ItemTemplate>
+                     <DataTemplate>
+                        <contentviews:CardView FrontFooter="{Binding Deck.QuestionLang}"
+                                               x:DataType="models:Card"
+                                               FrontHeader="{Binding Question}"
+                                               BackFooter="{Binding Deck.AnswerLang}"
+                                               BackHeader="{Binding Answer}"
+                                               BackContext="{Binding Context}"/>
+                    </DataTemplate>
+                 </CarouselView.ItemTemplate>
+            </CarouselView>
+            <Grid Grid.Row="1"
+                  HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    ImageSource="menu.png"
+                    HorizontalOptions="Start"
+                    Style="{DynamicResource SecondaryCircleButton}"/>
+                <Button
+                    Grid.Column="1"
+                    ImageSource="add.png"
+                    HorizontalOptions="End"
+                    Style="{DynamicResource PrimaryCircleButton}"
+                    Command="{Binding AddNewCardCommand}"/>
+            </Grid>
+        </Grid>
+        <Grid BackgroundColor="{DynamicResource Black}"
+              Opacity="{DynamicResource SemiTransparentOpacity}"
+              Margin="0,-20,0,0"
+              x:Name="BackdropGrid"
+              IsVisible="{Binding IsModalOpen}">
         </Grid>
     </Grid>
 </ContentPage>

@@ -1,6 +1,10 @@
-﻿ using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Behaviors;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using SWIFTcard.Models;
 using SWIFTcard.Services;
+using SWIFTcard.Views;
 
 namespace SWIFTcard.ViewModels
 {
@@ -14,6 +18,9 @@ namespace SWIFTcard.ViewModels
 
         [ObservableProperty]
         Deck _activeDeck;
+
+        [ObservableProperty]
+        bool _isModalOpen;
 
         CardService _cardService;
         DeckService _deckService;
@@ -41,7 +48,7 @@ namespace SWIFTcard.ViewModels
         {
             if (_deckService == null) return;
             DeckList = await _deckService.GetDecksAsync();
-            if(ActiveDeck == null && DeckList != null && DeckList.Count >0)
+            if (ActiveDeck == null && DeckList != null && DeckList.Count > 0)
             {
                 var activeDeck = DeckList.FirstOrDefault(item => item.IsActive);
 
@@ -54,6 +61,31 @@ namespace SWIFTcard.ViewModels
         public void SetActiveDeck(Deck deck)
         {
             ActiveDeck = deck;
+        }
+
+        [RelayCommand]
+        void Appearing()
+        {
+            UpdateStatusBarColor("AppBackgroundColor", StatusBarStyle.DarkContent);
+            IsModalOpen = false;
+        }
+
+        void UpdateStatusBarColor(string colorKey, StatusBarStyle statusBarStyle)
+        {
+            var rd = App.Current.Resources.MergedDictionaries.First();
+            AppShell.Current.Behaviors.Add(new StatusBarBehavior
+            {
+                StatusBarColor = (Color)rd[colorKey],
+                StatusBarStyle = statusBarStyle
+            });
+        }
+
+        [RelayCommand]
+        async Task AddNewCard()
+        {
+            IsModalOpen = true;
+            UpdateStatusBarColor("Gray300", StatusBarStyle.LightContent);
+            await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage());
         }
     }
 }

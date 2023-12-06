@@ -2,6 +2,9 @@
 using SWIFTcard.Models;
 using CommunityToolkit.Maui.Extensions;
 using SWIFTcard.ViewModels;
+using CommunityToolkit.Maui.Behaviors;
+using CommunityToolkit.Maui.Core;
+using AndroidX.Core.Graphics;
 
 namespace SWIFTcard.Views;
 
@@ -14,11 +17,6 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
-    }
-
-    async void Button_Clicked(System.Object sender, System.EventArgs e)
-    {
-        await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage());
     }
 }
 
