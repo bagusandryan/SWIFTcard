@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SWIFTcard.Views.CardDetailPage"
              Title="CardDetailPage"
-             Background="Transparent">
-    <Frame BorderColor="Transparent"
-           Margin="-2,30,-2,-30"
+             BackgroundColor="Transparent">
+    <Frame Margin="-2,60,-2,-30"
            CornerRadius="30"
            >
+        <Frame.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down" Swiped="OnSwipedDown"/>
+        </Frame.GestureRecognizers>
         <VerticalStackLayout Padding="30,30">
             <Border Stroke="Transparent"
                     StrokeThickness="0"

@@ -6,4 +6,9 @@ public partial class CardDetailPage : ContentPage
 	{
 		InitializeComponent();
     }
+
+    void OnSwipedDown(System.Object sender, Microsoft.Maui.Controls.SwipedEventArgs e)
+    {
+        Navigation.PopModalAsync();
+    }
 }
