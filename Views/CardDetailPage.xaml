@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:contentviews="clr-namespace:SWIFTcard.ContentViews"
              x:Class="SWIFTcard.Views.CardDetailPage"
              Title="CardDetailPage"
              BackgroundColor="Transparent">
@@ -10,56 +10,42 @@
         <Frame.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Down" Swiped="OnSwipedDown"/>
         </Frame.GestureRecognizers>
-        <VerticalStackLayout Padding="30,30">
-            <Border Stroke="Transparent"
-                    StrokeThickness="0"
+        <VerticalStackLayout Padding="20">
+            <Border Stroke="White"
+                    StrokeThickness="8"
                     StrokeShape="RoundRectangle 30"
                     Background="{DynamicResource CardBackgroundBrush}"
-                    HeightRequest="150"
-                    Padding="20"
+                    HeightRequest="168"
+                    Padding="30"
+                    Margin="-18,0,-18,0"
                     >
-                <Entry
-                    FontSize="35"
-                    Text="New word"></Entry>
+                <contentviews:BigEntry
+                    Header="New word"/>
             </Border>
-            <Border Stroke="Transparent"
-                    StrokeThickness="0"
+             <Border Stroke="White"
+                    StrokeThickness="8"
                     StrokeShape="RoundRectangle 30"
                     Background="{DynamicResource CardBackgroundBrush}"
-                    HeightRequest="150"
-                    Padding="20"
-                    Margin="0,-70,0,0"
+                    HeightRequest="168"
+                    Padding="30"
+                    Margin="-18,-60,-18,0"
                     >
-                <Border.Shadow>
-                    <Shadow
-                        Radius="30"
-                        Brush="Black"
-                        Opacity="0.3"
-                        Offset="0,-10"/>
-                </Border.Shadow>
-                 <Label Style="{DynamicResource CardMainLabel}"
-                       Text="Translation"/>
+                <contentviews:BigEntry
+                    Header="Translation"/>
             </Border>
-            <Border Stroke="Transparent"
-                    StrokeThickness="0"
+             <Border Stroke="White"
+                    StrokeThickness="8"
                     StrokeShape="RoundRectangle 30"
                     Background="{DynamicResource CardBackgroundBrush}"
                     HeightRequest="200"
-                    Padding="20"
-                    Margin="0,-70,0,0"
+                    Padding="30"
+                    Margin="-18,-60,-18,0"
                     >
-                <Border.Shadow>
-                    <Shadow
-                        Radius="30"
-                        Brush="Black"
-                        Opacity="0.3"
-                        Offset="0,-10"/>
-                </Border.Shadow>
-                 <Label Style="{DynamicResource CardMainLabel}"
-                       Text="Context"/>
+                <contentviews:BigEditor
+                    Header="Context"/>
             </Border>
             <Button
-                Margin="0,-40,0,0"
+                Margin="0,-60,0,0"
                 ImageSource="save.png"
                 HorizontalOptions="End"
                 Style="{DynamicResource PrimaryCircleButton}"/>

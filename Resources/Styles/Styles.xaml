@@ -122,6 +122,11 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Editor" x:Key="BigEditor">
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="FontFamily" Value="PoppinsBold" />
+    </Style>
+
     <Style TargetType="Entry">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
@@ -142,6 +147,11 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
+    </Style>
+
+    <Style TargetType="Entry" x:Key="BigEntry">
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="FontFamily" Value="PoppinsBold" />
     </Style>
 
     <Style TargetType="Frame">
