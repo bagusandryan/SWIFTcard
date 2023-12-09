@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SWIFTcard.Models;
 
@@ -8,11 +9,23 @@ namespace SWIFTcard.Services
 	{
         List<Deck> _deckList;
 
+        Deck _activeDeck;
+
         bool _init;
 
         public DeckService()
 		{
 		}
+
+        public void SetActiveDeck(Deck deck)
+        {
+            _activeDeck = deck;
+        }
+
+        public Deck GetActiveDeck()
+        {
+            return _activeDeck;
+        }
 
         public async Task<List<Deck>> GetDecksAsync()
         {

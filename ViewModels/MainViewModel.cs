@@ -15,10 +15,7 @@ namespace SWIFTcard.ViewModels
 
         [ObservableProperty]
         List<Card> _cardList;
-
-        [ObservableProperty]
-        Deck _activeDeck;
-
+       
         [ObservableProperty]
         bool _isModalOpen;
 
@@ -41,14 +38,14 @@ namespace SWIFTcard.ViewModels
         public async Task LoadAllCardsAsync()
         {
             if (_cardService == null) return;
-            CardList = await _cardService.GetCardsAsync(ActiveDeck);
+            CardList = await _cardService.GetCardsAsync(_deckService.GetActiveDeck());
         }
 
         public async Task LoadAllDecksAsync()
         {
             if (_deckService == null) return;
             DeckList = await _deckService.GetDecksAsync();
-            if (ActiveDeck == null && DeckList != null && DeckList.Count > 0)
+            if (_deckService.GetActiveDeck() == null && DeckList != null && DeckList.Count > 0)
             {
                 var activeDeck = DeckList.FirstOrDefault(item => item.IsActive);
 
@@ -60,7 +57,7 @@ namespace SWIFTcard.ViewModels
 
         public void SetActiveDeck(Deck deck)
         {
-            ActiveDeck = deck;
+            _deckService.SetActiveDeck(deck);
         }
 
         [RelayCommand]
@@ -85,7 +82,7 @@ namespace SWIFTcard.ViewModels
         {
             IsModalOpen = true;
             UpdateStatusBarColor("Gray300", StatusBarStyle.LightContent);
-            await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage());
+            await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage(new CardDetailViewModel(_cardService, _deckService)));
         }
     }
 }
