@@ -5,15 +5,13 @@
              x:Name="This">
     <Grid BindingContext="{x:Reference This}">
         <Label x:Name="HeaderLabel"
-               Style="{DynamicResource CardMainLabel}"
-               Text="{Binding Header}"
-               Margin="0,10,0,0"
-               HorizontalTextAlignment="Start"
-               HorizontalOptions="Start"/>
+               Style="{DynamicResource BigInputFieldLabel}"
+               Text="{Binding Header}"/>
         <Editor x:Name="TrueEditor"
                Focused="TrueEditor_Focused"
                Unfocused="TrueEditor_Unfocused"
                TextChanged="TrueEditor_TextChanged"
+               Margin="0,4,0,0"
                Style="{DynamicResource BigEditor}"
                Text="{Binding EntryText}"/>
     </Grid>

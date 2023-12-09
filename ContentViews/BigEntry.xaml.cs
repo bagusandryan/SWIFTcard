@@ -45,7 +45,7 @@ public partial class BigEntry : ContentView
     {
         if (!_headerMovedUp)
         {
-            _ = HeaderLabel.TranslateTo(-37, -35);
+            _ = HeaderLabel.TranslateTo(0, -14);
             await HeaderLabel.ScaleTo(0.5);
             _headerMovedUp = true;
         }
