@@ -32,11 +32,13 @@ public partial class CardDetailPage : ContentPage
         newCard.Context = Context.EntryText;
         newCard.Deck = _viewModel.GetActiveDeck();
 
-        await Navigation.PopModalAsync();
-
         Question.HideKeyboard();
         Answer.HideKeyboard();
         Context.HideKeyboard();
+
+        _viewModel.AddNewCard(newCard);
+
+        await Navigation.PopModalAsync();
 
         var snackbar = Snackbar.Make("Card added");
         await snackbar.Show();

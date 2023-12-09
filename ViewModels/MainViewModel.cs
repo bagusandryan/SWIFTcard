@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Behaviors;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Maui.Behaviors;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,10 +12,10 @@ namespace SWIFTcard.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        List<Deck> _deckList;
+        ObservableCollection<Deck> _deckList;
 
         [ObservableProperty]
-        List<Card> _cardList;
+        ObservableCollection<Card> _cardList;
        
         [ObservableProperty]
         bool _isModalOpen;

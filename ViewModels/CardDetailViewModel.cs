@@ -25,6 +25,11 @@ namespace SWIFTcard.ViewModels
         {
             return  _deckService.GetActiveDeck();
         }
+
+        public void AddNewCard(Card card)
+        {
+            _cardService.AddNewCard(card);
+        }
 	}
 }
 

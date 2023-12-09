@@ -1,18 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SWIFTcard.Helpers;
 using SWIFTcard.Models;
 
 namespace SWIFTcard.Services
 {
 	public class CardService
 	{
-		List<Card> cardList;
+        ObservableCollection<Card> cardList;
 
-		public CardService()
+        public CardService()
 		{
 		}
 
-		public async Task<List<Card>> GetCardsAsync(Deck deck)
+		public async Task<ObservableCollection<Card>> GetCardsAsync(Deck deck)
 		{
             CancellationToken cancellationToken = new CancellationToken();
 
@@ -25,12 +27,26 @@ namespace SWIFTcard.Services
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            cardList = data.ToObject<List<Card>>();
+            cardList = data.ToObject<ObservableCollection<Card>>();
 
-            cardList.ForEach(item => item.Deck = deck);
+            foreach(var item in cardList)
+            {
+                item.Deck = deck;
+            }
 
             return cardList;
         }
+
+        public void AddNewCard(Card card)
+        {
+            if(card.Deck == null)
+            {
+                throw new Exception("Deck is null. Card can only be added when Deck exists");
+            }
+            cardList.Add(card);
+            Json.Write(UserFile.GetCardsJson(card.Deck), cardList);
+        }
+
     }
 }
 

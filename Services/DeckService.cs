@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SWIFTcard.Models;
@@ -7,7 +8,7 @@ namespace SWIFTcard.Services
 {
 	public class DeckService
 	{
-        List<Deck> _deckList;
+        ObservableCollection<Deck> _deckList;
 
         Deck _activeDeck;
 
@@ -27,7 +28,7 @@ namespace SWIFTcard.Services
             return _activeDeck;
         }
 
-        public async Task<List<Deck>> GetDecksAsync()
+        public async Task<ObservableCollection<Deck>> GetDecksAsync()
         {
             //If Json file doesn't exist or newly created or empty then copy the decks json from app package
             if (string.IsNullOrEmpty(File.ReadAllText(Helpers.UserFile.GetDecksJson())))
@@ -47,7 +48,7 @@ namespace SWIFTcard.Services
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            _deckList = data.ToObject<List<Deck>>();
+            _deckList = data.ToObject<ObservableCollection<Deck>>();
 
             if(_init && _deckList != null && _deckList.Count > 0)
             {
