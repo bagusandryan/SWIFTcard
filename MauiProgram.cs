@@ -37,6 +37,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<DeckService>();
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddTransient<CardDetailPage>();
+        builder.Services.AddTransient<CardDetailViewModel>();
 
 
         //Remove borders from Entry
