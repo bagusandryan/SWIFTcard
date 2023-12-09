@@ -13,7 +13,7 @@
                Unfocused="TrueEntry_Unfocused"
                TextChanged="TrueEntry_TextChanged"
                Style="{DynamicResource BigEntry}"
-               Text="{Binding EntryText}"/>
+               Text="{Binding EntryText, Mode=TwoWay}"/>
     </Grid>
 </ContentView>
 

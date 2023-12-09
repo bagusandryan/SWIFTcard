@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls;
+﻿using CommunityToolkit.Maui.Core.Platform;
+using Microsoft.Maui.Controls;
 using static Android.Preferences.PreferenceActivity;
 
 namespace SWIFTcard.ContentViews;
@@ -59,5 +60,10 @@ public partial class BigEntry : ContentView
             await HeaderLabel.ScaleTo(1);
             _headerMovedUp = false;
         }
+    }
+
+    public async void HideKeyboard()
+    {
+        await TrueEntry.HideKeyboardAsync(CancellationToken.None);
     }
 }

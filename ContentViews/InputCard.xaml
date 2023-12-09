@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SWIFTcard.ContentViews.InputCard"
+             xmlns:contentviews="clr-namespace:SWIFTcard.ContentViews"
+             x:Name="This"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <ContentView.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    </ContentView.Resources>
+    <Border Stroke="White"
+            BindingContext="{x:Reference This}"
+            StrokeThickness="8"
+            StrokeShape="RoundRectangle 30"
+            Background="{DynamicResource CardBackgroundBrush}"
+            Padding="30"
+            HeightRequest="{Binding CardHeight}"
+            >
+        <Grid>
+            <contentviews:BigEntry
+                x:Name="BigEntry"
+                IsVisible="{Binding IsMultipleLines, Converter={StaticResource InvertedBoolConverter}}"
+                Header="{Binding Header}"
+                EntryText="{Binding EntryText, Mode=TwoWay}"/>
+            <contentviews:BigEditor
+                x:Name="BigEditor"
+                IsVisible="{Binding IsMultipleLines}"
+                Header="{Binding Header}"
+                EditorText="{Binding EntryText, Mode=TwoWay}"/>
+        </Grid>    
+    </Border>
+</ContentView>
+

@@ -13,7 +13,7 @@
                TextChanged="TrueEditor_TextChanged"
                Margin="0,4,0,0"
                Style="{DynamicResource BigEditor}"
-               Text="{Binding EntryText}"/>
+               Text="{Binding EditorText, Mode=TwoWay}"/>
     </Grid>
 </ContentView>
 
