@@ -233,6 +233,17 @@
         <Setter Property="Opacity" Value="{DynamicResource SemiTransparentOpacity}" />
     </Style>
 
+    <Style TargetType="Label"
+           x:Key="BigInputFieldLabel"
+           BasedOn="{StaticResource CardMainLabel}">
+        <Setter Property="Margin" Value="0,10,0,0" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="AnchorX" Value="0" />
+        <Setter Property="AnchorY" Value="0" />
+    </Style>
+
     <Style TargetType="ListView">
         <Setter Property="SeparatorColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
         <Setter Property="RefreshControlColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
