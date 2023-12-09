@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:contentviews="clr-namespace:SWIFTcard.ContentViews"
              x:Class="SWIFTcard.Views.CardDetailPage"
              Title="CardDetailPage"
+             x:Name="This"
              BackgroundColor="Transparent">
     <Frame Margin="-2,60,-2,-30"
            CornerRadius="30"
@@ -11,44 +12,25 @@
                 <SwipeGestureRecognizer Direction="Down" Swiped="OnSwipedDown"/>
         </Frame.GestureRecognizers>
         <VerticalStackLayout Padding="20">
-            <Border Stroke="White"
-                    StrokeThickness="8"
-                    StrokeShape="RoundRectangle 30"
-                    Background="{DynamicResource CardBackgroundBrush}"
-                    HeightRequest="168"
-                    Padding="30"
-                    Margin="-18,0,-18,0"
-                    >
-                <contentviews:BigEntry
-                    Header="New word"/>
-            </Border>
-             <Border Stroke="White"
-                    StrokeThickness="8"
-                    StrokeShape="RoundRectangle 30"
-                    Background="{DynamicResource CardBackgroundBrush}"
-                    HeightRequest="168"
-                    Padding="30"
-                    Margin="-18,-60,-18,0"
-                    >
-                <contentviews:BigEntry
-                    Header="Translation"/>
-            </Border>
-             <Border Stroke="White"
-                    StrokeThickness="8"
-                    StrokeShape="RoundRectangle 30"
-                    Background="{DynamicResource CardBackgroundBrush}"
-                    HeightRequest="200"
-                    Padding="30"
-                    Margin="-18,-60,-18,0"
-                    >
-                <contentviews:BigEditor
-                    Header="Context"/>
-            </Border>
+            <contentviews:InputCard CardHeight="168"
+                                    Margin="-18,0,-18,0"
+                                    Header="New Word"
+                                    x:Name="Question"/>
+            <contentviews:InputCard CardHeight="168"
+                                    Margin="-18,-60,-18,0"
+                                    Header="Translation"
+                                    x:Name="Answer"/>
+            <contentviews:InputCard CardHeight="200"
+                                    Margin="-18,-60,-18,0"
+                                    Header="Context"
+                                    IsMultipleLines="True"
+                                    x:Name="Context"/>
             <Button
                 Margin="0,-60,0,0"
                 ImageSource="save.png"
                 HorizontalOptions="End"
-                Style="{DynamicResource PrimaryCircleButton}"/>
+                Style="{DynamicResource PrimaryCircleButton}"
+                Clicked="AddNewCard"/>
         </VerticalStackLayout>
     </Frame>
 </ContentPage>
