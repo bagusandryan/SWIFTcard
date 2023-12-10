@@ -46,7 +46,8 @@
                     Grid.Column="0"
                     ImageSource="menu.png"
                     HorizontalOptions="Start"
-                    Style="{DynamicResource SecondaryCircleButton}"/>
+                    Style="{DynamicResource SecondaryCircleButton}"
+                    Clicked="ShowMenu"/>
                 <Button
                     Grid.Column="1"
                     ImageSource="add.png"
@@ -61,6 +62,26 @@
               x:Name="BackdropGrid"
               IsVisible="{Binding IsModalOpen}">
         </Grid>
+         <Frame Background="{DynamicResource CardBackgroundBrush}"
+                CornerRadius="30"
+                VerticalOptions="End"
+                BorderColor="Transparent"
+                x:Name="Menu"
+                AnchorX="0"
+                AnchorY="1"
+                Scale="0"
+                Margin="30,0,30,124"
+                IsVisible="False"
+                >
+            <VerticalStackLayout HorizontalOptions="Start">
+                <Button ImageSource="manage_cards.png"
+                        Text="Manage cards"
+                        Style="{DynamicResource MenuButton}"/>
+                <Button ImageSource="switch_decks.png"
+                        Text="Switch deck"
+                        Style="{DynamicResource MenuButton}"/>
+            </VerticalStackLayout>
+        </Frame>
     </Grid>
 </ContentPage>
 
