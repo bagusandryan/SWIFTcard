@@ -2,6 +2,7 @@
 using Android.Content;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using SWIFTcard.Models;
 using SWIFTcard.Services;
 
@@ -19,6 +20,8 @@ namespace SWIFTcard.ViewModels
         {
             _cardService = cardService;
             _deckService = deckService;
+            App.Current.On<Microsoft.Maui.Controls.PlatformConfiguration.Android>()
+            .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 
         public Deck GetActiveDeck()

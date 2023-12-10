@@ -83,7 +83,9 @@ namespace SWIFTcard.ViewModels
         {
             IsModalOpen = true;
             UpdateStatusBarColor("Gray300", StatusBarStyle.LightContent);
-            await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage(new CardDetailViewModel(_cardService, _deckService)));
+            CardDetailViewModel cardDetailViewModel = new CardDetailViewModel(_cardService, _deckService);
+            cardDetailViewModel.IsAddMode = true;
+            await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage(cardDetailViewModel));
         }
     }
 }
