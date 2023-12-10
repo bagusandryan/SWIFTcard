@@ -73,6 +73,8 @@
 	  <None Remove="Resources\Raw\decks.json" />
 	  <None Remove="Resources\Raw\cards.json" />
 	  <None Remove="Resources\Images\save.svg" />
+	  <None Remove="Resources\Images\switch.svg" />
+	  <None Remove="Resources\Images\decks.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Models\" />
@@ -91,5 +93,7 @@
 	  <BundleResource Include="Resources\Raw\decks.json" />
 	  <BundleResource Include="Resources\Raw\cards.json" />
 	  <BundleResource Include="Resources\Images\save.svg" />
+	  <BundleResource Include="Resources\Images\switch_decks.svg" />
+	  <BundleResource Include="Resources\Images\manage_cards.svg" />
 	</ItemGroup>
 </Project>
