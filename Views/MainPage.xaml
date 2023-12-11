@@ -47,7 +47,8 @@
                     ImageSource="menu.png"
                     HorizontalOptions="Start"
                     Style="{DynamicResource SecondaryCircleButton}"
-                    Clicked="ShowMenu"/>
+                    Command="{Binding ShowMenuCommand}"
+                    CommandParameter="{x:Reference Menu}"/>
                 <Button
                     Grid.Column="1"
                     ImageSource="add.png"
@@ -70,13 +71,14 @@
                 AnchorX="0"
                 AnchorY="1"
                 Scale="0"
-                Margin="30,0,30,124"
+                Margin="30,0,30,120"
                 IsVisible="False"
                 >
             <VerticalStackLayout HorizontalOptions="Start">
                 <Button ImageSource="manage_cards.png"
                         Text="Manage cards"
-                        Style="{DynamicResource MenuButton}"/>
+                        Style="{DynamicResource MenuButton}"
+                        Command="{Binding ShowAllCardsCommand}"/>
                 <Button ImageSource="switch_decks.png"
                         Text="Switch deck"
                         Style="{DynamicResource MenuButton}"/>

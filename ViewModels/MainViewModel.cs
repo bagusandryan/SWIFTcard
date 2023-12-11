@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using AndroidX.Lifecycle;
 using CommunityToolkit.Maui.Behaviors;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -22,6 +23,8 @@ namespace SWIFTcard.ViewModels
 
         CardService _cardService;
         DeckService _deckService;
+
+        Frame _menu;
 
         public MainViewModel(CardService cardService, DeckService deckService)
         {
@@ -64,8 +67,7 @@ namespace SWIFTcard.ViewModels
         [RelayCommand]
         void Appearing()
         {
-            UpdateStatusBarColor("AppBackgroundColor", StatusBarStyle.DarkContent);
-            IsModalOpen = false;
+            SetModal(false);
         }
 
         void UpdateStatusBarColor(string colorKey, StatusBarStyle statusBarStyle)
@@ -81,11 +83,58 @@ namespace SWIFTcard.ViewModels
         [RelayCommand]
         async Task AddNewCard()
         {
-            IsModalOpen = true;
-            UpdateStatusBarColor("Gray300", StatusBarStyle.LightContent);
+            SetModal(true);
             CardDetailViewModel cardDetailViewModel = new CardDetailViewModel(_cardService, _deckService);
             cardDetailViewModel.IsAddMode = true;
             await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage(cardDetailViewModel));
+        }
+
+        [RelayCommand]
+        async Task ShowAllCards()
+        {
+            SetModal(true);
+            CardDetailViewModel cardDetailViewModel = new CardDetailViewModel(_cardService, _deckService);
+            cardDetailViewModel.IsAddMode = false;
+            await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage(cardDetailViewModel));
+            await HideMenu();
+        }
+
+        [RelayCommand]
+        async Task ShowMenu(Frame Menu)
+        {
+            _menu = Menu;
+            if (!_menu.IsVisible)
+            {
+                _menu.IsVisible = true;
+                _ = _menu.ScaleTo(1, 250);
+                await Task.Delay(100);
+                SetModal(true);
+                return;
+            }
+            SetModal(false);
+            await HideMenu();
+        }
+
+        async Task HideMenu()
+        {
+            if (_menu == null) return;
+            _ = _menu.ScaleTo(0, 250);
+            await Task.Delay(100);
+            SetModal(IsModalOpen);
+            _menu.IsVisible = false;
+        }
+
+        void SetModal(bool isOpen)
+        {
+            IsModalOpen = isOpen;
+            if (IsModalOpen)
+            {
+                UpdateStatusBarColor("Gray300", StatusBarStyle.LightContent);
+            }
+            else
+            {
+                UpdateStatusBarColor("AppBackgroundColor", StatusBarStyle.DarkContent);
+            }
         }
     }
 }
