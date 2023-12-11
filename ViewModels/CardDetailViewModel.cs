@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Android.Content;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -13,6 +14,9 @@ namespace SWIFTcard.ViewModels
         [ObservableProperty]
         bool _isAddMode;
 
+        [ObservableProperty]
+        ObservableCollection<Card> _cardList;
+
         CardService _cardService;
         DeckService _deckService;
 
@@ -22,6 +26,10 @@ namespace SWIFTcard.ViewModels
             _deckService = deckService;
             App.Current.On<Microsoft.Maui.Controls.PlatformConfiguration.Android>()
             .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+            if(!IsAddMode)
+            {
+                _ = LoadAllCardsAsync();
+            }
         }
 
         public Deck GetActiveDeck()
@@ -33,6 +41,12 @@ namespace SWIFTcard.ViewModels
         {
             _cardService.AddNewCard(card);
         }
-	}
+
+        public async Task LoadAllCardsAsync()
+        {
+            if (_cardService == null || _deckService == null) return;
+            CardList = await _cardService.GetCardsAsync(GetActiveDeck());
+        }
+    }
 }
 

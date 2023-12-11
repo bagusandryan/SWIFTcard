@@ -1,37 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:contentviews="clr-namespace:SWIFTcard.ContentViews"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentviews="clr-namespace:SWIFTcard.ContentViews"
+             xmlns:viewmodels="clr-namespace:SWIFTcard.ViewModels"
+             xmlns:models="clr-namespace:SWIFTcard.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SWIFTcard.Views.CardDetailPage"
              Title="CardDetailPage"
              x:Name="This"
              BackgroundColor="Transparent">
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    </ContentPage.Resources>
     <Frame Margin="-2,0,-2,-30"
            CornerRadius="30"
-           VerticalOptions="End"
            >
+        <Frame.Triggers>
+            <DataTrigger TargetType="Frame"
+                         Binding="{Binding IsEnabled, Source={x:Reference FakeGrid}}"
+                         Value="True">
+                <Setter Property="VerticalOptions"
+                        Value="End" />
+            </DataTrigger>
+            <DataTrigger TargetType="Frame"
+                         Binding="{Binding IsEnabled, Source={x:Reference FakeGrid}}"
+                         Value="False">
+                <Setter Property="VerticalOptions"
+                        Value="StartAndExpand" />
+            </DataTrigger>
+        </Frame.Triggers>
         <Frame.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Down" Swiped="OnSwipedDown"/>
         </Frame.GestureRecognizers>
-        <VerticalStackLayout Padding="20">
-            <contentviews:InputCard CardHeight="168"
-                                    Margin="-18,0,-18,0"
-                                    Header="New Word"
-                                    x:Name="Question"/>
-            <contentviews:InputCard CardHeight="168"
-                                    Margin="-18,-60,-18,0"
-                                    Header="Translation"
-                                    x:Name="Answer"/>
-            <contentviews:InputCard CardHeight="200"
-                                    Margin="-18,-60,-18,0"
-                                    Header="Context"
-                                    IsMultipleLines="True"
-                                    x:Name="Context"/>
-            <Button
-                Margin="0,-60,0,30"
-                ImageSource="save.png"
-                HorizontalOptions="End"
-                Style="{DynamicResource PrimaryCircleButton}"
-                Clicked="AddNewCard"/>
-        </VerticalStackLayout>
+        <Grid x:DataType="viewmodels:CardDetailViewModel">
+            <Grid x:Name="FakeGrid" WidthRequest="0" HeightRequest="0" IsEnabled="{Binding _viewModel.IsAddMode, Source={x:Reference This}}"/>
+            <VerticalStackLayout Padding="20"
+                                 x:Name="AddNewCardStackLayout"
+                                 IsVisible="{Binding IsAddMode}"
+                                 >
+                <contentviews:InputCard CardHeight="168"
+                                        Margin="-18,0,-18,0"
+                                        Header="New Word"
+                                        x:Name="Question"/>
+                <contentviews:InputCard CardHeight="168"
+                                        Margin="-18,-60,-18,0"
+                                        Header="Translation"
+                                        x:Name="Answer"/>
+                <contentviews:InputCard CardHeight="200"
+                                        Margin="-18,-60,-18,0"
+                                        Header="Context"
+                                        IsMultipleLines="True"
+                                        x:Name="Context"/>
+                <Button
+                    Margin="0,-60,0,30"
+                    ImageSource="save.png"
+                    HorizontalOptions="End"
+                    Style="{DynamicResource PrimaryCircleButton}"
+                    Clicked="AddNewCard"/>
+            </VerticalStackLayout>
+            <CollectionView x:Name="AllCardsCollectionView"
+                            ItemsSource="{Binding CardList}"
+                            IsVisible="{Binding IsAddMode, Converter={StaticResource InvertedBoolConverter}}">
+                  <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Card">
+                        <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                               BorderColor="Transparent"
+                               CornerRadius="30"
+                               Padding="30"
+                               VerticalOptions="Start"
+                               Margin="0,0,0,10">
+                            <VerticalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding Question}"
+                                           Style="{DynamicResource CardBodyLabel}"/>
+                                    <Label Text=" | "
+                                           Style="{DynamicResource CardBodyLabel}"
+                                           Opacity="{DynamicResource SemiTransparentOpacity}"/>
+                                    <Label Text="{Binding Answer}"
+                                           Style="{DynamicResource CardBodyLabel}"
+                                           Opacity="{DynamicResource SemiTransparentOpacity}"/>
+                                </HorizontalStackLayout>
+                                <Label Text="{Binding Context}"
+                                       LineBreakMode="WordWrap"
+                                       Style="{DynamicResource CardFooterLabel}"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </Frame>
 </ContentPage>
