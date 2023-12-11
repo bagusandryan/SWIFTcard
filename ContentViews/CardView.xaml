@@ -54,7 +54,7 @@
                             Background="{DynamicResource CardBackgroundBrush}"/>
                 </Grid>
                 <Label  x:Name="ContextLabel"
-                         Style="{DynamicResource CardBodyLabel}"
+                         Style="{DynamicResource CardBodyInvertedLabel}"
                          IsVisible="{Binding IsBack}"
                          Text="{Binding BackContext}"
                          LineBreakMode="WordWrap"/>

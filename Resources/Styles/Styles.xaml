@@ -230,6 +230,11 @@
            x:Key="CardBodyLabel"
            BasedOn="{StaticResource CardMainLabel}">
         <Setter Property="FontSize" Value="18" />
+    </Style>
+
+    <Style TargetType="Label"
+           x:Key="CardBodyInvertedLabel"
+           BasedOn="{StaticResource CardMainLabel}">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundInvertedColor}}" />
         <Setter Property="Opacity" Value="{DynamicResource SemiTransparentOpacity}" />
     </Style>
