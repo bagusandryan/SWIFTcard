@@ -36,6 +36,12 @@
                     </DataTemplate>
                  </CarouselView.ItemTemplate>
             </CarouselView>
+            <Grid BackgroundColor="{DynamicResource Black}"
+                  Opacity="{DynamicResource SemiTransparentOpacity}"
+                  Margin="-30,-20"
+                  x:Name="BackdropGrid"
+                  Grid.RowSpan="2"
+                  IsVisible="{Binding IsModalOpen}"/>
             <Grid Grid.Row="1"
                   HorizontalOptions="FillAndExpand">
                 <Grid.ColumnDefinitions>
@@ -54,14 +60,23 @@
                     ImageSource="add.png"
                     HorizontalOptions="End"
                     Style="{DynamicResource PrimaryCircleButton}"
-                    Command="{Binding AddNewCardCommand}"/>
+                    Command="{Binding AddNewCardCommand}">
+                     <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding IsVisible, Source={x:Reference BackdropGrid}}"
+                                     Value="True">
+                                <Setter Property="Opacity"
+                                        Value="0.5" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding IsVisible, Source={x:Reference BackdropGrid}}"
+                                     Value="False">
+                            <Setter Property="Opacity"
+                                        Value="1" />
+                            </DataTrigger>
+                      </Button.Triggers>
+                </Button>
             </Grid>
-        </Grid>
-        <Grid BackgroundColor="{DynamicResource Black}"
-              Opacity="{DynamicResource SemiTransparentOpacity}"
-              Margin="0,-20,0,0"
-              x:Name="BackdropGrid"
-              IsVisible="{Binding IsModalOpen}">
         </Grid>
          <Frame Background="{DynamicResource CardBackgroundBrush}"
                 CornerRadius="30"
