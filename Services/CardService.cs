@@ -47,6 +47,16 @@ namespace SWIFTcard.Services
             Json.Write(UserFile.GetCardsJson(card.Deck), cardList);
         }
 
+        public void DeleteCard(Card card)
+        {
+            if (card.Deck == null)
+            {
+                throw new Exception("Deck is null. Card can only be added when Deck exists");
+            }
+            cardList.Remove(card);
+            Json.Write(UserFile.GetCardsJson(card.Deck), cardList);
+        }
+
     }
 }
 

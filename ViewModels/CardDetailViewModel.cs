@@ -26,7 +26,7 @@ namespace SWIFTcard.ViewModels
             _deckService = deckService;
             App.Current.On<Microsoft.Maui.Controls.PlatformConfiguration.Android>()
             .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-            if(!IsAddMode)
+            if (!IsAddMode)
             {
                 _ = LoadAllCardsAsync();
             }
@@ -34,7 +34,7 @@ namespace SWIFTcard.ViewModels
 
         public Deck GetActiveDeck()
         {
-            return  _deckService.GetActiveDeck();
+            return _deckService.GetActiveDeck();
         }
 
         public void AddNewCard(Card card)
@@ -46,6 +46,12 @@ namespace SWIFTcard.ViewModels
         {
             if (_cardService == null || _deckService == null) return;
             CardList = await _cardService.GetCardsAsync(GetActiveDeck());
+        }
+
+        [RelayCommand]
+        void DeleteCard(Card card)
+        {
+            _cardService.DeleteCard(card);
         }
     }
 }

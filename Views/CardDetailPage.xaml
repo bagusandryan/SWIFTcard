@@ -62,29 +62,43 @@
                             ItemsSource="{Binding CardList}"
                             IsVisible="{Binding IsAddMode, Converter={StaticResource InvertedBoolConverter}}">
                   <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Card">
-                        <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
-                               BorderColor="Transparent"
-                               CornerRadius="30"
-                               Padding="30"
-                               VerticalOptions="Start"
-                               Margin="0,0,0,10">
-                            <VerticalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label Text="{Binding Question}"
-                                           Style="{DynamicResource CardBodyLabel}"/>
-                                    <Label Text=" | "
-                                           Style="{DynamicResource CardBodyLabel}"
-                                           Opacity="{DynamicResource SemiTransparentOpacity}"/>
-                                    <Label Text="{Binding Answer}"
-                                           Style="{DynamicResource CardBodyLabel}"
-                                           Opacity="{DynamicResource SemiTransparentOpacity}"/>
-                                </HorizontalStackLayout>
-                                <Label Text="{Binding Context}"
-                                       LineBreakMode="WordWrap"
-                                       Style="{DynamicResource CardFooterLabel}"/>
-                            </VerticalStackLayout>
-                        </Frame>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItemView  Command="{Binding BindingContext.DeleteCardCommand, Source={x:Reference This}}"
+                                                    CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
+                                                    >
+                                        <Grid Margin="20,0"
+                                              Padding="20,0">
+                                            <Image Source="delete.png"/>
+                                        </Grid>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Frame  BackgroundColor="{DynamicResource CardBackgroundColor}"
+                                    BorderColor="Transparent"
+                                    CornerRadius="30"
+                                    Padding="30"
+                                    VerticalOptions="Start"
+                                    Margin="0,0,0,10">
+                                    <VerticalStackLayout x:DataType="models:Card">
+                                        <HorizontalStackLayout>
+                                            <Label Text="{Binding Question}"
+                                                   Style="{DynamicResource CardBodyLabel}"/>
+                                            <Label Text=" | "
+                                                   Style="{DynamicResource CardBodyLabel}"
+                                                   Opacity="{DynamicResource SemiTransparentOpacity}"/>
+                                            <Label Text="{Binding Answer}"
+                                                   Style="{DynamicResource CardBodyLabel}"
+                                                   Opacity="{DynamicResource SemiTransparentOpacity}"/>
+                                        </HorizontalStackLayout>
+                                        <Label Text="{Binding Context}"
+                                               LineBreakMode="WordWrap"
+                                               Style="{DynamicResource CardFooterLabel}"/>
+                                    </VerticalStackLayout>
+                            </Frame>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

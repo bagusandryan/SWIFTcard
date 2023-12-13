@@ -75,6 +75,7 @@
 	  <None Remove="Resources\Images\save.svg" />
 	  <None Remove="Resources\Images\switch.svg" />
 	  <None Remove="Resources\Images\decks.svg" />
+	  <None Remove="Resources\Images\delete.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Models\" />
@@ -95,5 +96,6 @@
 	  <BundleResource Include="Resources\Images\save.svg" />
 	  <BundleResource Include="Resources\Images\switch_decks.svg" />
 	  <BundleResource Include="Resources\Images\manage_cards.svg" />
+	  <BundleResource Include="Resources\Images\delete.svg" />
 	</ItemGroup>
 </Project>
