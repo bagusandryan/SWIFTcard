@@ -49,9 +49,13 @@ namespace SWIFTcard.ViewModels
         }
 
         [RelayCommand]
-        void DeleteCard(Card card)
+        async Task DeleteCard(Card card)
         {
-            _cardService.DeleteCard(card);
+            bool answer = await Shell.Current.DisplayAlert($"Delete {card.Question}", "Would you like to delete this card? This action cannot be undone.", "Delete", "No");
+            if (answer)
+            {
+                _cardService.DeleteCard(card);
+            }
         }
     }
 }
