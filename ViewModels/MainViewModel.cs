@@ -41,7 +41,7 @@ namespace SWIFTcard.ViewModels
 
         public async Task LoadAllCardsAsync()
         {
-            if (_cardService == null) return;
+            if (_cardService == null || _deckService == null || _deckService.GetActiveDeck() == null) return;
             CardList = await _cardService.GetCardsAsync(_deckService.GetActiveDeck());
         }
 
@@ -65,9 +65,10 @@ namespace SWIFTcard.ViewModels
         }
 
         [RelayCommand]
-        void Appearing()
+        async Task Appearing()
         {
             SetModal(false);
+            await LoadAllCardsAsync();
         }
 
         void UpdateStatusBarColor(string colorKey, StatusBarStyle statusBarStyle)
