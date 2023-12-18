@@ -38,9 +38,21 @@ public partial class CardDetailPage : ContentPage
 
         _viewModel.AddNewCard(newCard);
 
-        await Navigation.PopModalAsync();
 
-        var snackbar = Snackbar.Make("Card added");
-        await snackbar.Show();
+        //ToDo: We can use Preference next time to avoid multiple Prompt
+        bool answer = await Shell.Current.DisplayAlert($"{newCard.Question} added", "Would you like to add another card?", "Add another", "No");
+        if (!answer)
+        {
+            await Navigation.PopModalAsync();
+            var snackbar = Snackbar.Make("Card added");
+            await snackbar.Show();
+            return;
+        }
+
+        Question.EntryText = string.Empty;
+        Answer.EntryText = string.Empty;
+        Context.EntryText = string.Empty;
+
+        Question.FocusKeyboard();
     }
 }

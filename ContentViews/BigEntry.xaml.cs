@@ -31,9 +31,15 @@ public partial class BigEntry : ContentView
 
     async void TrueEntry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
-        if (TrueEntry != null && !string.IsNullOrEmpty(TrueEntry.Text) && !TrueEntry.IsFocused)
+        if (TrueEntry != null && !string.IsNullOrEmpty(TrueEntry.Text))
         {
             await MoveHeaderUp();
+            return;
+        }
+
+        if(e.OldTextValue?.Length>0 && e.NewTextValue?.Length==0)
+        {
+            await MoveHeaderDown();
         }
     }
 
@@ -52,18 +58,28 @@ public partial class BigEntry : ContentView
         }
     }
 
+    async Task MoveHeaderDown()
+    {
+        _ = HeaderLabel.TranslateTo(0, 0);
+        await HeaderLabel.ScaleTo(1);
+        _headerMovedUp = false;
+    }
+
     async void TrueEntry_Unfocused(System.Object sender, Microsoft.Maui.Controls.FocusEventArgs e)
     {
         if (TrueEntry != null && string.IsNullOrWhiteSpace(TrueEntry.Text) && _headerMovedUp)
         {
-            _ = HeaderLabel.TranslateTo(0, 0);
-            await HeaderLabel.ScaleTo(1);
-            _headerMovedUp = false;
+            await MoveHeaderDown();
         }
     }
 
     public async void HideKeyboard()
     {
         await TrueEntry.HideKeyboardAsync(CancellationToken.None);
+    }
+
+    public void FocusKeyboard()
+    {
+        TrueEntry.Focus();
     }
 }

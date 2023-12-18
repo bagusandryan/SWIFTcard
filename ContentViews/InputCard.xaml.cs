@@ -46,6 +46,12 @@ public partial class InputCard : ContentView
         }
     }
 
+    public void FocusKeyboard()
+    {
+        //Only for single line
+        BigEntry.Focus();
+    }
+
     public InputCard()
 	{
 		InitializeComponent();
