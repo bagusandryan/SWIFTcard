@@ -7,16 +7,10 @@
     <ContentView.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
     </ContentView.Resources>
-    <Frame  HasShadow="False"
-            x:Name="CardFrame"
+    <Frame  x:Name="CardFrame"
             BindingContext="{x:Reference This}"
-            BorderColor="Transparent"
-            Background="{DynamicResource CardBackgroundBrush}"
-            CornerRadius="30"
-            Padding="0"
-            Margin="20,0"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand">
+            Style="{DynamicResource CardViewFrame}"
+            >
         <Grid Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

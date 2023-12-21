@@ -168,6 +168,17 @@
         <Setter Property="CornerRadius" Value="8" />
     </Style>
 
+    <Style TargetType="Frame" x:Key="CardViewFrame">
+        <Setter Property="HasShadow" Value="False" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="30" />
+        <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
+        <Setter Property="Margin" Value="20,0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+    </Style>
+
     <Style TargetType="ImageButton">
         <Setter Property="Opacity" Value="1" />
         <Setter Property="BorderColor" Value="Transparent"/>
@@ -244,6 +255,18 @@
            BasedOn="{StaticResource CardMainLabel}">
         <Setter Property="FontSize" Value="15" />
         <Setter Property="Opacity" Value="{DynamicResource SemiTransparentOpacity}" />
+    </Style>
+
+    <Style TargetType="Label"
+           x:Key="MiniCardHeaderLabel"
+           BasedOn="{StaticResource CardFooterLabel}">
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <Style TargetType="Label"
+           x:Key="MiniCardBodyLabel"
+           BasedOn="{StaticResource CardFooterLabel}">
+        <Setter Property="FontSize" Value="12" />
     </Style>
 
     <Style TargetType="Label"
