@@ -34,8 +34,7 @@ public partial class CardDetailPage : ContentPage
 
         _viewModel.AddNewCard(newCard);
 
-        var snackbar = Snackbar.Make($"{newCard.Question} card added");
-        await snackbar.Show();
+        await Helpers.CustomSnackbar.ShowCustomSnackbar($"{newCard.Question} card added");
 
         Question.EntryText = string.Empty;
         Answer.EntryText = string.Empty;
