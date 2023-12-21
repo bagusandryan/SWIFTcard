@@ -32,10 +32,6 @@ public partial class CardDetailPage : ContentPage
         newCard.Context = Context.EntryText;
         newCard.Deck = _viewModel.GetActiveDeck();
 
-        Question.HideKeyboard();
-        Answer.HideKeyboard();
-        Context.HideKeyboard();
-
         _viewModel.AddNewCard(newCard);
 
         var snackbar = Snackbar.Make($"{newCard.Question} card added");
