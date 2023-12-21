@@ -137,6 +137,12 @@ namespace SWIFTcard.ViewModels
             await HideMenu();
         }
 
+        [RelayCommand]
+        void ReloadDeck()
+        {
+            _ = InitialLoadAsync();
+        }
+
         async Task HideMenu()
         {
             if (_menu == null) return;

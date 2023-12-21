@@ -150,6 +150,7 @@
                    <Button x:Name="ReloadButton"
                            ImageSource="refresh.png"
                            HorizontalOptions="Center"
+                           Command="{Binding ReloadDeckCommand}"
                            Style="{DynamicResource PrimaryCircleButton}"/>
                 </VerticalStackLayout>
             </Grid>
