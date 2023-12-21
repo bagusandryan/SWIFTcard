@@ -21,6 +21,16 @@ namespace SWIFTcard.ViewModels
         [ObservableProperty]
         bool _isModalOpen;
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsAnyDeckOrCardLoaded))]
+        bool _isAnyCardLoaded;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsAnyDeckOrCardLoaded))]
+        bool _isAnyDeckLoaded;
+
+        public bool IsAnyDeckOrCardLoaded => IsAnyCardLoaded || IsAnyDeckLoaded;
+
         CardService _cardService;
         DeckService _deckService;
 
@@ -41,13 +51,23 @@ namespace SWIFTcard.ViewModels
 
         public async Task LoadAllCardsAsync()
         {
-            if (_cardService == null || _deckService == null || _deckService.GetActiveDeck() == null) return;
+            if (_cardService == null || _deckService == null || _deckService.GetActiveDeck() == null)
+            {
+                IsAnyCardLoaded = false;
+                return;
+            }
+
             CardList = await _cardService.GetCardsAsync(_deckService.GetActiveDeck());
+            IsAnyCardLoaded = true;
         }
 
         public async Task LoadAllDecksAsync()
         {
-            if (_deckService == null) return;
+            if (_deckService == null)
+            {
+                IsAnyDeckLoaded = false;
+                return;
+            }
             DeckList = await _deckService.GetDecksAsync();
             if (_deckService.GetActiveDeck() == null && DeckList != null && DeckList.Count > 0)
             {
@@ -56,6 +76,7 @@ namespace SWIFTcard.ViewModels
                 if (activeDeck == null) activeDeck = DeckList[0];
 
                 SetActiveDeck(activeDeck);
+                IsAnyCardLoaded = true;
             }
         }
 

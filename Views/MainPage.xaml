@@ -7,6 +7,9 @@
              x:Name="This"
              x:DataType="viewModel:MainViewModel"
              Style="{DynamicResource AppPage}">
+    <ContentPage.Resources>
+        <mct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    </ContentPage.Resources>
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
@@ -43,7 +46,8 @@
                   Grid.RowSpan="2"
                   IsVisible="{Binding IsModalOpen}"/>
             <Grid Grid.Row="1"
-                  HorizontalOptions="FillAndExpand">
+                  HorizontalOptions="FillAndExpand"
+                  IsVisible="{Binding IsAnyDeckOrCardLoaded}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -78,7 +82,7 @@
                 </Button>
             </Grid>
         </Grid>
-         <Frame Background="{DynamicResource CardBackgroundBrush}"
+        <Frame  Background="{DynamicResource CardBackgroundBrush}"
                 CornerRadius="30"
                 VerticalOptions="End"
                 BorderColor="Transparent"
@@ -98,6 +102,57 @@
                         Text="Switch deck"
                         Style="{DynamicResource MenuButton}"/>
             </VerticalStackLayout>
+        </Frame>        
+        <Frame  x:Name="EmptyState"
+                Style="{DynamicResource CardViewFrame}"
+                Padding="20"
+                Margin="30,50"
+                IsVisible="{Binding IsAnyCardLoaded,
+                Converter={StaticResource InvertedBoolConverter}}"
+                >
+            <Grid>
+                <VerticalStackLayout VerticalOptions="Center"
+                                 Spacing="20"
+                                 IsVisible="{Binding IsAnyCardLoaded,
+                                 Converter={StaticResource InvertedBoolConverter}}"
+                                 x:Name="NoCardStack"
+                                 >
+                    <Image x:Name="NoCardImage"
+                            Source="no_card.png"
+                            Opacity="{DynamicResource SemiTransparentOpacity}"/>
+                    <Label x:Name="EmptyCardHeader"
+                            Text="No cards in this deck"
+                            Style="{DynamicResource CardBodyLabel}"
+                            HorizontalTextAlignment="Center"
+                            Opacity="{DynamicResource SemiTransparentOpacity}"
+                            />
+                    <Button x:Name="AddNewCardButton"
+                            ImageSource="add.png"
+                            HorizontalOptions="Center"
+                            Style="{DynamicResource PrimaryCircleButton}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout VerticalOptions="Center"
+                                     Spacing="20"
+                                     IsVisible="{Binding IsAnyDeckLoaded,
+                                     Converter={StaticResource InvertedBoolConverter}}"
+                                     x:Name="NoDeckStack"
+                                     Background="{DynamicResource CardBackgroundBrush}"
+                                     >
+                    <Image x:Name="NoDeckImage"
+                        Source="no_card.png"
+                        Opacity="{DynamicResource SemiTransparentOpacity}"/>
+                    <Label x:Name="EmptyDeckHeader"
+                            Text="No deck loaded"
+                            Style="{DynamicResource CardBodyLabel}"
+                            HorizontalTextAlignment="Center"
+                            Opacity="{DynamicResource SemiTransparentOpacity}"
+                            />
+                   <Button x:Name="ReloadButton"
+                           ImageSource="refresh.png"
+                           HorizontalOptions="Center"
+                           Style="{DynamicResource PrimaryCircleButton}"/>
+                </VerticalStackLayout>
+            </Grid>
         </Frame>
     </Grid>
 </ContentPage>
