@@ -72,8 +72,15 @@
                             ItemsSource="{Binding CardList}"
                             Rotation="180"
                             Grid.Row="2"
-                            ItemsUpdatingScrollMode="KeepLastItemInView">
-                  <CollectionView.ItemTemplate>
+                            ItemsUpdatingScrollMode="KeepLastItemInView"
+                            ChildAdded="AllCardsCollectionView_ChildAdded"
+                            >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       SnapPointsType="None"
+                                       SnapPointsAlignment="End" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView Rotation="180">
                             <SwipeView.RightItems>

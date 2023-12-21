@@ -47,4 +47,15 @@ public partial class CardDetailPage : ContentPage
 
         Question.FocusKeyboard();
     }
+
+    bool _scrolled;
+
+    void AllCardsCollectionView_ChildAdded(System.Object sender, Microsoft.Maui.Controls.ElementEventArgs e)
+    {
+        if(!_scrolled)
+        {
+            _scrolled = true;
+            AllCardsCollectionView.ScrollTo(_viewModel.CardList.Count - 1, -1, ScrollToPosition.Start, false);
+        }
+    }
 }
