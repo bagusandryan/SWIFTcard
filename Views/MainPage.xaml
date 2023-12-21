@@ -100,7 +100,8 @@
                         Command="{Binding ShowAllCardsCommand}"/>
                 <Button ImageSource="switch_decks.png"
                         Text="Switch deck"
-                        Style="{DynamicResource MenuButton}"/>
+                        Style="{DynamicResource MenuButton}"
+                        Command="{Binding ShowDecksCommand}"/>
             </VerticalStackLayout>
         </Frame>        
         <Frame  x:Name="EmptyState"

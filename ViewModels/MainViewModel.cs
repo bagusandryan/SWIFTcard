@@ -122,6 +122,15 @@ namespace SWIFTcard.ViewModels
         }
 
         [RelayCommand]
+        async Task ShowDecks()
+        {
+            SetModal(true);
+            ManageDecksViewModel manageDecksViewModel = new ManageDecksViewModel(_cardService, _deckService);
+            await App.Current.MainPage.Navigation.PushModalAsync(new ManageDecksPage(manageDecksViewModel));
+            await HideMenu();
+        }
+
+        [RelayCommand]
         async Task ShowMenu(Frame Menu)
         {
             _menu = Menu;
