@@ -21,6 +21,16 @@ namespace SWIFTcard.Services
         public void SetActiveDeck(Deck deck)
         {
             _activeDeck = deck;
+
+            foreach (var item in _deckList)
+            {
+                item.IsActive = false;
+            }
+
+            if (_deckList.Where(item => item.Id == deck.Id).FirstOrDefault() is Deck activeDeck)
+            {
+                activeDeck.IsActive = true;
+            }
         }
 
         public Deck GetActiveDeck()
@@ -36,6 +46,8 @@ namespace SWIFTcard.Services
                 _init = true;
                 await Helpers.UserFile.CopyFileFromAppPackageToAppDataDirectory("decks.json", Helpers.UserDirectory.GetAppDataDirectory());
             }
+
+            if (_deckList != null) return _deckList;
 
             CancellationToken cancellationToken = new CancellationToken();
 
