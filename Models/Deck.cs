@@ -29,6 +29,10 @@ namespace SWIFTcard.Models
         [property: JsonIgnore]
         [ObservableProperty]
         string _answerLang;
+
+        [JsonIgnore]
+        [ObservableProperty]
+        string _deckInfo;
     }
 }
 
