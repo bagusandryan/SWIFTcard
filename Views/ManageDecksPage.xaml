@@ -1,12 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentviews="clr-namespace:SWIFTcard.ContentViews"
+             xmlns:viewModel="clr-namespace:SWIFTcard.ViewModels" xmlns:models="clr-namespace:SWIFTcard.Models"
              x:Class="SWIFTcard.Views.ManageDecksPage"
+             x:DataType="viewModel:ManageDecksViewModel"
              Title="ManageDecksPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Text="Your decks"
+               Margin="0,0,0,8"
+               Grid.Row="0"
+               Style="{DynamicResource CardFooterLabel}"/>
+        <CollectionView x:Name="DecksCollectionView"
+                        Grid.Row="1"
+                        ItemsSource="{Binding DeckList}">
+            <CollectionView.Header>
+                <contentviews:DeckView
+                    IsAddCard="True"
+                    IsActive="False"/>
+            </CollectionView.Header>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Deck">
+                    <contentviews:DeckView QuestionHeader="{Binding QuestionLang}"
+                                           AnswerHeader="{Binding AnswerLang}"
+                                           InfoFooter="{Binding DeckInfo}"
+                                           IsActive="{Binding IsActive}"/>
+                 </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Label Text="Your cards"
+            Margin="0,0,0,8"
+            Grid.Row="2"
+            Style="{DynamicResource CardFooterLabel}"/>
+    </Grid>
 </ContentPage>
