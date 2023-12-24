@@ -13,4 +13,9 @@ public partial class ManageDecksPage : ContentPage
 		_viewModel = manageDecksViewModel;
 		BindingContext = _viewModel;
     }
+
+    async void OnSwipedDown(System.Object sender, Microsoft.Maui.Controls.SwipedEventArgs e)
+    {
+        await Navigation.PopModalAsync();
+    }
 }
