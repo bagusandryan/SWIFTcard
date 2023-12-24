@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using SWIFTcard.Models;
 using SWIFTcard.Services;
+using SWIFTcard.Views;
 
 namespace SWIFTcard.ViewModels
 {
@@ -59,6 +60,12 @@ namespace SWIFTcard.ViewModels
                     break;
                 }
             }
+        }
+
+        public async Task AddNewDeck()
+        {
+            AddDeckViewModel addDeckViewModel = new AddDeckViewModel(_deckService);
+            await App.Current.MainPage.Navigation.PushModalAsync(new AddDeckPage(addDeckViewModel));
         }
     }
 }
