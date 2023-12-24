@@ -30,7 +30,9 @@
             <CollectionView x:Name="DecksCollectionView"
                             Grid.Row="1"
                             ItemsSource="{Binding DeckList}"
-                            Margin="0,0,0,18">
+                            Margin="0,0,0,18"
+                            ItemsUpdatingScrollMode="KeepLastItemInView"
+                            >
                 <CollectionView.Header>
                     <contentviews:DeckView
                         IsAddCard="True"
@@ -47,7 +49,7 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Deck">
-                        <contentviews:DeckView QuestionHeader="{Binding QuestionLang}"
+                        <contentviews:DeckView QuestionHeader="{Binding Name}"
                                                AnswerHeader="{Binding AnswerLang}"
                                                InfoFooter="{Binding DeckInfo}"
                                                IsActive="{Binding IsActive}"/>

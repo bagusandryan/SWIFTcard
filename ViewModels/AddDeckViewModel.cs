@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
+using SWIFTcard.Models;
 using SWIFTcard.Services;
 
 namespace SWIFTcard.ViewModels
@@ -17,10 +18,11 @@ namespace SWIFTcard.ViewModels
           .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 
-		[RelayCommand]
-        void AddNewDeck()
+        public async Task AddNewDeck(Deck deck)
         {
+            _deckService.AddNewDeck(deck);
 
+            await Helpers.CustomSnackbar.ShowCustomSnackbar($"{deck.Name} deck added");
         }
     }
 }

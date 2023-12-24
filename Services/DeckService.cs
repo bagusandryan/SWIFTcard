@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SWIFTcard.Helpers;
 using SWIFTcard.Models;
 
 namespace SWIFTcard.Services
@@ -68,6 +69,13 @@ namespace SWIFTcard.Services
             }
 
             return _deckList;
+        }
+
+
+        public void AddNewDeck(Deck deck)
+        {
+            _deckList.Add(deck);
+            Json.Write(UserFile.GetDecksJson(), _deckList);
         }
     }
 }
