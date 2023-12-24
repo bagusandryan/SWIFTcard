@@ -13,11 +13,11 @@
         <Border StrokeShape="RoundRectangle 30"
                 Stroke="Transparent"
                 StrokeThickness="8"
-                WidthRequest="200"
-                HeightRequest="200"
+                WidthRequest="172"
+                HeightRequest="172"
                 VerticalOptions="StartAndExpand"
                 HorizontalOptions="StartAndExpand"
-                Margin="20,0,0,0"
+                Margin="16,0,0,0"
                 x:Name="BackDeck"
                 >
             <Border.Triggers>
@@ -36,13 +36,13 @@
             </Border.Triggers>
         </Border> 
         <Border Stroke="{DynamicResource White}"
-                StrokeThickness="8"
+                StrokeThickness="4"
                 StrokeShape="RoundRectangle 30"
-                WidthRequest="200"
-                HeightRequest="200"
+                WidthRequest="172"
+                HeightRequest="172"
                 VerticalOptions="StartAndExpand"
                 HorizontalOptions="StartAndExpand"
-                Margin="0,20,0,0"
+                Margin="0,16,0,0"
                 x:Name="FrontDeck"
                 >
              <Border.Triggers>
@@ -64,26 +64,28 @@
                    HorizontalOptions="Center"
                    IsVisible="{Binding IsAddCard}"/>
         </Border>
-        <HorizontalStackLayout Margin="32,46,0,0"
+        <HorizontalStackLayout Margin="28,42,0,0"
                                VerticalOptions="Start"
                                IsVisible="{Binding IsAddCard, Converter={StaticResource InvertedBoolConverter}}">
             <Label x:Name="DeckHeaderLabel"
                     Text="{Binding QuestionHeader}"
                     Style="{DynamicResource MiniCardHeaderLabel}"/>
              <Label Text=" | "
-                    Style="{DynamicResource CardFooterLabel}"/>
+                    Style="{DynamicResource CardFooterLabel}"
+                    IsVisible="False"/>
             <Label Text="{Binding AnswerHeader}"
-                    Style="{DynamicResource CardFooterLabel}"/>
+                    Style="{DynamicResource CardFooterLabel}"
+                    IsVisible="False"/>
         </HorizontalStackLayout>
         <Grid VerticalOptions="End"
-              Margin="32,0,0,24"
+              Margin="28,0,0,24"
               IsVisible="{Binding IsAddCard, Converter={StaticResource InvertedBoolConverter}}">
                 <Label Text="{Binding InfoFooter}"
                     Style="{DynamicResource CardFooterLabel}"
                     HorizontalOptions="Start"
                     VerticalOptions="End"/>
                 <Image  Source="settings.png"
-                        Margin="0,0,48,0"
+                        Margin="0,0,38,0"
                         HorizontalOptions="End"
                         VerticalOptions="End"
                         />
