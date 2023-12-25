@@ -17,55 +17,39 @@
             <SwipeGestureRecognizer Direction="Down" Swiped="OnSwipedDown"/>
         </Frame.GestureRecognizers>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Text="Your decks"
-                   Margin="30,30,0,0"
-                   Grid.Row="0"
-                   Style="{DynamicResource CardFooterLabel}"/>
-            <CollectionView x:Name="DecksCollectionView"
-                            Grid.Row="1"
-                            ItemsSource="{Binding DeckList}"
-                            Margin="0,0,0,18"
-                            ItemsUpdatingScrollMode="KeepLastItemInView"
-                            >
-                <CollectionView.Header>
-                    <contentviews:DeckView
-                        IsAddCard="True"
-                        IsActive="False"
-                        Margin="10,0,0,0"
-                        >
-                        <contentviews:DeckView.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="AddNewDeck"/>
-                        </contentviews:DeckView.GestureRecognizers>
-                    </contentviews:DeckView>
-                </CollectionView.Header>
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Deck">
-                        <contentviews:DeckView QuestionHeader="{Binding Name}"
-                                               AnswerHeader="{Binding AnswerLang}"
-                                               InfoFooter="{Binding DeckInfo}"
-                                               IsActive="{Binding IsActive}"/>
-                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <Label Text="Your cards"
-                Margin="30,0,0,8"
-                Grid.Row="2"
-                Style="{DynamicResource CardFooterLabel}"/>
-             <Grid BackgroundColor="{DynamicResource Black}"
-                   Opacity="{DynamicResource SemiTransparentOpacity}"
-                   Margin="-30,-20"
-                   x:Name="BackdropGrid"
-                   IsVisible="False"
-                   Grid.RowSpan="4"/>
+            <ScrollView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Your decks"
+                           Margin="30,30,0,0"
+                           Grid.Row="0"
+                           Style="{DynamicResource CardFooterLabel}"/>
+                    <FlexLayout x:Name="DecksFlexLayout"
+                                Grid.Row="1"
+                                Margin="-6,0,0,18"
+                                Wrap="Wrap"
+                                JustifyContent="Start"
+                                Loaded="DecksFlexLayout_Loaded">
+                        <contentviews:DeckView IsAddCard="True"
+                                               IsActive="False"
+                                               Margin="10,0,0,0"
+                                               >
+                            <contentviews:DeckView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddNewDeck"/>
+                            </contentviews:DeckView.GestureRecognizers>
+                         </contentviews:DeckView>
+                    </FlexLayout>
+                    <Grid  BackgroundColor="{DynamicResource Black}"
+                           Opacity="{DynamicResource SemiTransparentOpacity}"
+                           Margin="-30,-20"
+                           x:Name="BackdropGrid"
+                           IsVisible="False"
+                           Grid.RowSpan="2"/>
+                </Grid>
+            </ScrollView>
         </Grid>
     </Frame>
 </ContentPage>
