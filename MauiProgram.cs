@@ -5,6 +5,7 @@ using SWIFTcard.Views;
 using SWIFTcard.ViewModels;
 using SWIFTcard.Services;
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+using Microsoft.Maui.LifecycleEvents;
 
 namespace SWIFTcard;
 
@@ -15,7 +16,26 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
+            .ConfigureLifecycleEvents(events =>
+            {
+#if ANDROID
+                events.AddAndroid(android => android.OnCreate((activity, bundle) => MakeStatusBarTranslucent(activity)));
+                static void MakeStatusBarTranslucent(Android.App.Activity activity)
+                {
+                    var resourceDictionary = App.Current.Resources.MergedDictionaries.FirstOrDefault();
+                    if (resourceDictionary != null)
+                    {
+                        var hasValue = resourceDictionary.TryGetValue("AppBackgroundColor", out object backgroundColor);
+                        if (hasValue && backgroundColor is Color color)
+                        {
+                            activity.Window.SetNavigationBarColor(Android.Graphics.Color.ParseColor(color.ToHex()));
+                        }
+                    }
+                    activity.Window.SetNavigationBarColor(Android.Graphics.Color.ParseColor("#FAFAFA"));
+                }
+#endif
+            })
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
