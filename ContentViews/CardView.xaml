@@ -6,6 +6,7 @@
              x:Name="This">
     <ContentView.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        <toolkit:IsStringNotNullOrWhiteSpaceConverter x:Key="IsStringNotNullOrWhiteSpaceConverter" />
     </ContentView.Resources>
     <Frame  x:Name="CardFrame"
             BindingContext="{x:Reference This}"
@@ -31,21 +32,25 @@
                          Style="{DynamicResource CardMainLabel}"
                          Text="{Binding FrontHeader}"/>
                 <Grid IsVisible="{Binding IsBack}"
-                      Opacity="{DynamicResource SemiTransparentOpacity}">
+                      Opacity="{DynamicResource SemiTransparentOpacity}"
+                      >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Text="context"
                            Grid.Column="0"
-                           Style="{DynamicResource CardSubBodyInvertedLabel}"/>
+                           Style="{DynamicResource CardSubBodyInvertedLabel}"
+                           IsVisible="{Binding BackContext, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}"
+                           />
                     <Border HeightRequest="6"
                             Margin="4,0,0,0"
                             Grid.Column="1"
                             HorizontalOptions="FillAndExpand"
                             StrokeShape="RoundRectangle 6"
                             Stroke="Transparent"
-                            Background="{DynamicResource CardBackgroundBrush}"/>
+                            Background="{DynamicResource CardBackgroundBrush}"
+                            IsVisible="{Binding BackContext, Converter={StaticResource IsStringNotNullOrWhiteSpaceConverter}}"/>
                 </Grid>
                 <Label  x:Name="ContextLabel"
                          Style="{DynamicResource CardBodyInvertedLabel}"
