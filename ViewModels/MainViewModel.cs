@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using AndroidX.Lifecycle;
 using CommunityToolkit.Maui.Behaviors;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -90,6 +89,7 @@ namespace SWIFTcard.ViewModels
         {
             SetModal(false);
             await LoadAllCardsAsync();
+            Helpers.UI.UpdateNavigationBarColor(IsModalOpen);
         }
 
         void UpdateStatusBarColor(string colorKey, StatusBarStyle statusBarStyle)
@@ -109,25 +109,28 @@ namespace SWIFTcard.ViewModels
             CardDetailViewModel cardDetailViewModel = new CardDetailViewModel(_cardService, _deckService);
             cardDetailViewModel.IsAddMode = true;
             await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage(cardDetailViewModel));
+            Helpers.UI.UpdateNavigationBarColor(false);
         }
 
         [RelayCommand]
         async Task ShowAllCards()
         {
             SetModal(true);
+            await HideMenu();
+            Helpers.UI.UpdateNavigationBarColor(false);
             CardDetailViewModel cardDetailViewModel = new CardDetailViewModel(_cardService, _deckService);
             cardDetailViewModel.IsAddMode = false;
             await App.Current.MainPage.Navigation.PushModalAsync(new CardDetailPage(cardDetailViewModel));
-            await HideMenu();
         }
 
         [RelayCommand]
         async Task ShowDecks()
         {
             SetModal(true);
+            await HideMenu();
             ManageDecksViewModel manageDecksViewModel = new ManageDecksViewModel(_cardService, _deckService);
             await App.Current.MainPage.Navigation.PushModalAsync(new ManageDecksPage(manageDecksViewModel));
-            await HideMenu();
+            Helpers.UI.UpdateNavigationBarColor(false);
         }
 
         [RelayCommand]
@@ -140,9 +143,11 @@ namespace SWIFTcard.ViewModels
                 _ = _menu.ScaleTo(1, 250);
                 await Task.Delay(100);
                 SetModal(true);
+                Helpers.UI.UpdateNavigationBarColor(IsModalOpen);
                 return;
             }
             SetModal(false);
+            Helpers.UI.UpdateNavigationBarColor(IsModalOpen);
             await HideMenu();
         }
 
