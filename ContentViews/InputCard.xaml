@@ -8,7 +8,7 @@
     <ContentView.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
     </ContentView.Resources>
-    <Border Stroke="White"
+    <Border Stroke="{DynamicResource AppBackgroundColor}"
             BindingContext="{x:Reference This}"
             StrokeThickness="8"
             StrokeShape="RoundRectangle 30"

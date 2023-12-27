@@ -10,6 +10,8 @@
             CornerRadius="30"
             VerticalOptions="End"
             x:DataType="viewModel:AddDeckViewModel"
+            BorderColor="{DynamicResource AppBackgroundColor}"
+            BackgroundColor="{DynamicResource AppBackgroundColor}"
             >
         <Frame.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Down" Swiped="OnSwipedDown"/>

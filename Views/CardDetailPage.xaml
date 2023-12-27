@@ -10,6 +10,8 @@
              BackgroundColor="Transparent">
     <Frame Margin="-2,0,-2,-30"
            CornerRadius="30"
+           BorderColor="{DynamicResource AppBackgroundColor}"
+           BackgroundColor="{DynamicResource AppBackgroundColor}"
            >
         <Frame.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Down" Swiped="OnSwipedDown"/>
