@@ -42,9 +42,7 @@
                             </contentviews:DeckView.GestureRecognizers>
                          </contentviews:DeckView>
                     </FlexLayout>
-                    <Grid  BackgroundColor="{DynamicResource Black}"
-                           Opacity="{DynamicResource SemiTransparentOpacity}"
-                           Margin="-30,-20"
+                    <Grid  Style="{DynamicResource BackdropGrid}"
                            x:Name="BackdropGrid"
                            IsVisible="False"
                            Grid.RowSpan="2"/>

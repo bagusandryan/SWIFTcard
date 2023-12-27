@@ -39,9 +39,7 @@
                     </DataTemplate>
                  </CarouselView.ItemTemplate>
             </CarouselView>
-            <Grid BackgroundColor="{DynamicResource Black}"
-                  Opacity="{DynamicResource SemiTransparentOpacity}"
-                  Margin="-30,-20"
+            <Grid Style="{DynamicResource BackdropGrid}"
                   x:Name="BackdropGrid"
                   Grid.RowSpan="2"
                   IsVisible="{Binding IsModalOpen}"/>

@@ -510,5 +510,10 @@
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
+   <Style TargetType="Grid" x:Key="BackdropGrid">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Black}" />
+        <Setter Property="Opacity" Value="{DynamicResource SemiTransparentOpacity}" />
+        <Setter Property="Margin" Value="-35,-25" />
+    </Style>
 </ResourceDictionary>
 
