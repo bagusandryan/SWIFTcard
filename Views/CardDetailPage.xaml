@@ -70,7 +70,6 @@
                             ItemsSource="{Binding CardList}"
                             Rotation="180"
                             ItemsUpdatingScrollMode="KeepLastItemInView"
-                            ChildAdded="AllCardsCollectionView_ChildAdded"
                             VerticalOptions="StartAndExpand"
                             >
                 <CollectionView.Triggers>

@@ -17,6 +17,11 @@ public partial class CardDetailPage : ContentPage
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
+        AllCardsCollectionView.ChildAdded -= AllCardsCollectionView_ChildAdded;
+        if(_viewModel.IsAddMode)
+        {
+            AllCardsCollectionView.ChildAdded += AllCardsCollectionView_ChildAdded;
+        }
     }
 
     async void OnSwipedDown(System.Object sender, Microsoft.Maui.Controls.SwipedEventArgs e)
@@ -47,7 +52,7 @@ public partial class CardDetailPage : ContentPage
 
     void AllCardsCollectionView_ChildAdded(System.Object sender, Microsoft.Maui.Controls.ElementEventArgs e)
     {
-        if(!_scrolled)
+        if(!_scrolled && _viewModel.IsAddMode)
         {
             _scrolled = true;
             AllCardsCollectionView.ScrollTo(_viewModel.CardList.Count - 1, -1, ScrollToPosition.Start, false);
