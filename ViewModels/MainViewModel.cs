@@ -21,6 +21,9 @@ namespace SWIFTcard.ViewModels
         bool _isModalOpen;
 
         [ObservableProperty]
+        bool _isBusy;
+
+        [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsAnyDeckOrCardLoaded))]
         bool _isAnyCardLoaded;
 
@@ -44,8 +47,10 @@ namespace SWIFTcard.ViewModels
 
         public async Task InitialLoadAsync()
         {
+            IsBusy = true;
             await LoadAllDecksAsync();
             await LoadAllCardsAsync();
+            IsBusy = false;
         }
 
         public async Task LoadAllCardsAsync()
@@ -141,14 +146,13 @@ namespace SWIFTcard.ViewModels
             {
                 _menu.IsVisible = true;
                 _ = _menu.ScaleTo(1, 250);
-                await Task.Delay(100);
                 SetModal(true);
                 Helpers.UI.UpdateNavigationBarColor(IsModalOpen);
                 return;
             }
             SetModal(false);
             Helpers.UI.UpdateNavigationBarColor(IsModalOpen);
-            await HideMenu();
+            await HideMenu(true);
         }
 
         [RelayCommand]
@@ -157,11 +161,17 @@ namespace SWIFTcard.ViewModels
             _ = InitialLoadAsync();
         }
 
-        async Task HideMenu()
+        async Task HideMenu(bool toogle = false)
         {
             if (_menu == null) return;
-            _ = _menu.ScaleTo(0, 250);
-            await Task.Delay(100);
+            if (toogle)
+            {
+                await _menu.ScaleTo(0, 250);
+            }
+            else
+            {
+                await _menu.ScaleTo(0, 10);
+            }
             SetModal(IsModalOpen);
             _menu.IsVisible = false;
         }

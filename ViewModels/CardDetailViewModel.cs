@@ -15,6 +15,9 @@ namespace SWIFTcard.ViewModels
         bool _isAddMode;
 
         [ObservableProperty]
+        bool _isBusy;
+
+        [ObservableProperty]
         ObservableCollection<Card> _cardList;
 
         CardService _cardService;
@@ -45,7 +48,10 @@ namespace SWIFTcard.ViewModels
         public async Task LoadAllCardsAsync()
         {
             if (_cardService == null || _deckService == null) return;
+            IsBusy = true;
+            await Task.Delay(500);
             CardList = await _cardService.GetCardsAsync(GetActiveDeck());
+            IsBusy = false;
         }
 
         [RelayCommand]

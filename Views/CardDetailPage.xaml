@@ -16,7 +16,8 @@
         <Frame.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Down" Swiped="OnSwipedDown"/>
         </Frame.GestureRecognizers>
-        <Grid x:DataType="viewmodels:CardDetailViewModel">
+        <Grid x:DataType="viewmodels:CardDetailViewModel"
+              >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -50,7 +51,8 @@
             </VerticalStackLayout>
             <Label Text="Your cards"
                    Margin="0,0,0,8"
-                   Style="{DynamicResource CardFooterLabel}">
+                   Style="{DynamicResource CardFooterLabel}"
+                   >
                 <Label.Triggers>
                     <DataTrigger TargetType="Label"
                                  Binding="{Binding IsEnabled, Source={x:Reference FakeGrid}}"
@@ -71,6 +73,7 @@
                             Rotation="180"
                             ItemsUpdatingScrollMode="KeepLastItemInView"
                             VerticalOptions="StartAndExpand"
+                            ChildAdded="AllCardsCollectionView_ChildAdded"
                             >
                 <CollectionView.Triggers>
                     <DataTrigger TargetType="CollectionView"
@@ -134,6 +137,10 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               Color="{DynamicResource Primary}"
+                               WidthRequest="50"
+                               Grid.Row="2"/>
         </Grid>
     </Frame>
 </ContentPage>

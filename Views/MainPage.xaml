@@ -79,6 +79,10 @@
                       </Button.Triggers>
                 </Button>
             </Grid>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                    Color="{DynamicResource Primary}"
+                    WidthRequest="50"
+                    Grid.RowSpan="2"/>
         </Grid>
         <Frame  Background="{DynamicResource CardBackgroundBrush}"
                 CornerRadius="30"
