@@ -1,5 +1,5 @@
 # SWIFTcard
-![GIF of SWIFTcard home screen](https://s5.gifyu.com/images/SipVU.gif)
+![GIF of SWIFTcard home screen](https://github.com/bagusandryan/SWIFTcard/blob/main/SWIFTCard.gif)
 
 A yet another flashcards app — just a tad flashier. Made using .NET MAUI C#. 
 
