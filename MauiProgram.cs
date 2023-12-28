@@ -4,8 +4,6 @@ using AndroidX.AppCompat.App;
 using SWIFTcard.Views;
 using SWIFTcard.ViewModels;
 using SWIFTcard.Services;
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
-using Microsoft.Maui.LifecycleEvents;
 
 namespace SWIFTcard;
 
